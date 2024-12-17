@@ -14,6 +14,11 @@ interface Props{
 export const SocketProvider: React.FC<Props>=({children})=>{
     const navigate=useNavigate();// will help us programmatically handle navigation
     useEffect(()=>{
+        const enterRoom=({roomid}:{roomid:string})=>{
+            navigate(`/room/${roomid}`);
+        }
+        // we will transfer the user to the room page when we collect an event of room_created from server
+        socket.on("oom-created",enterRoom);
 
     },[]);
     return (<SocketContext.Provider value={{socket}}>{children}</SocketContext.Provider>)
