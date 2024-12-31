@@ -9,8 +9,10 @@ const Room:React.FC=()=>{
         //emitting this event so that either creator of the room or joinee in the room 
         //anyone is added the server knownsthat new people have been added 
         //to this room
-        if (user)socket.emit("joined-room",{roomId:id,peerId:user._id});
-    },[]);
+        if (user){
+            console.log("New user with id",user._id,"has joined room",id);
+            socket.emit("joined-room",{roomId:id,peerId:user._id});}
+    },[id]);
     return (
         <div>
             room:{id}
